@@ -1,0 +1,1 @@
+web: bin/spajam_stech_api

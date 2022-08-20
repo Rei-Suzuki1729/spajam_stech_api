@@ -1,0 +1,10 @@
+# setup:
+#   addons:
+#   - plan: JawsDB MySQL
+#     as: DATABASE
+
+build:
+  docker:
+    web: Dockerfile
+    worker: Dockerfile
+
