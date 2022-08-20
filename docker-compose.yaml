@@ -1,23 +1,6 @@
 version: '3'
 
 services:
-  mariadb:
-    image: mariadb:10.3
-    container_name: mariadb-stech
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      TZ: 'Asia/Tokyo'
-    volumes:
-      - ./database/data:/var/lib/mysql  
-      - ./database/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./database/initdb.d:/docker-entrypoint-initdb.d
-    ports:
-      - "3306:3306"
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin-stech
@@ -25,9 +8,11 @@ services:
       - mariadb
     environment:
       - PMA_ARBITRARY=1
-      - PMA_HOSTS=mariadb
-      - PMA_USER=root
-      - PMA_PASSWORD=root
+      - PMA_HOSTS=r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+      - PMA_USER=fcxjqrrnpl2zeqod
+      - PMA_PASSWORD=uw925vz81qi2lo28
+      - PMA_PORT=3306
+      - PMA_DATABASE=u5dgnkfxds9253ou
     ports:
       - "3000:80"
     volumes:
@@ -38,6 +23,12 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: api-server-stech
+    environment: 
+      - DB_HOST=r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+      - DB_USER=fcxjqrrnpl2zeqod
+      - DB_PASSWORD=uw925vz81qi2lo28
+      - DB_PORT=3306
+      - DB_NAME=u5dgnkfxds9253ou
     ports:
       - 1323:1323
     tty: true
