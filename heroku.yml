@@ -1,6 +1,4 @@
 build:
-  language:
-    - go
   docker:
     web: Dockerfile
     worker: Dockerfile
