@@ -1,36 +1,36 @@
 version: '3'
 
 services:
-  postgres:
-    build:
-      context: .
-      dockerfile: database/Dockerfile
-    container_name: postgres
-    restart: always
+  mariadb:
+    image: mariadb:10.3
+    container_name: mariadb-stech
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      PGPASSWORD: password
-      POSTGRES_DB: database
-      TZ: "Asia/Tokyo"
-    ports:
-      - 5432:5432
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      TZ: 'Asia/Tokyo'
     volumes:
-      - postgres:/var/lib/postgresql/data
-
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: always
-    container_name: pgadmin
+      - ./database/data:/var/lib/mysql  
+      - ./database/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./database/initdb.d:/docker-entrypoint-initdb.d
     ports:
-      - 1234:80
-    environment:
-      PGADMIN_DEFAULT_EMAIL: pgadmin@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: password
-    volumes:
-      - pgadmin:/var/lib/pgadmin
+      - "3306:3306"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-stech
     depends_on:
-      - postgres
+      - mariadb
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=mariadb
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    ports:
+      - "3000:80"
+    volumes:
+      - ./docker/phpmyadmin/sessions:/sessions
 
 volumes:
   postgres:

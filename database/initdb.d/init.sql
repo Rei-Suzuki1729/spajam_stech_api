@@ -1,8 +1,5 @@
-CREATE DATABASE database;
-GRANT ALL PRIVILEGES ON DATABASE database TO user;
-
-DROP TABLE IF EXISTS database.public.posts;
-CREATE TABLE database.public.posts (
+DROP TABLE IF EXISTS posts;
+CREATE TABLE posts (
   id SERIAL PRIMARY KEY, 
   name VARCHAR(100), 
   time REAL NOT NULL, 
