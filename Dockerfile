@@ -1,4 +1,4 @@
-FROM golang:1.19.0-alpine
+FROM golang:1.19.0-alpine3.16
 
 RUN apk add --update &&  apk add git curl
 
@@ -8,10 +8,7 @@ WORKDIR /go/src/app
 
 ENV GO111MODULE=on
 
-RUN go get -u github.com/cosmtrek/air
 
-RUN go mod download
+#RUN go mod download
 
 EXPOSE $PORT
-
-CMD ["air"]
