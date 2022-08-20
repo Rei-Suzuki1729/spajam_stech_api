@@ -17,6 +17,7 @@ services:
     ports:
       - "3306:3306"
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin-stech
@@ -31,6 +32,15 @@ services:
       - "3000:80"
     volumes:
       - ./docker/phpmyadmin/sessions:/sessions
+
+  api-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-server-stech
+    ports:
+      - 1323:1323
+    tty: true
 
 volumes:
   postgres:
