@@ -1,10 +1,13 @@
-# setup:
-#   addons:
-#   - plan: JawsDB MySQL
-#     as: DATABASE
-
 build:
+  language:
+    - go
   docker:
     web: Dockerfile
     worker: Dockerfile
+  config:
+    DB_HOST: ${DB_HOST}
+    DB_USER: ${DB_USER}
+    DB_PASSWORD: ${DB_PASSWORD}}
+    DB_PORT: ${DB_PORT}
+    DB_NAME: ${DB_NAME}
 
