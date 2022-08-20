@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: Stage_Dockerfile
+run:
+  web: air
