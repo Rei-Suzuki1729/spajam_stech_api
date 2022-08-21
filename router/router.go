@@ -21,6 +21,8 @@ func Initialize() *echo.Echo {
 	e.POST("/posts", controllers.CreatePost)
 	e.PUT("/posts/:id", controllers.UpdatePost)
 	e.DELETE("/posts/:id", controllers.DeletePost)
+
+	e.GET("/posts/ranking", controllers.GetPostsRanking)
 	
 
 	return e

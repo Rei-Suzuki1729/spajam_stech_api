@@ -2,6 +2,7 @@ package controllers
 
 import (
 	
+	"log"
 	"time"
 	"strconv"
 	"net/http"
@@ -86,6 +87,17 @@ func DeletePost(c echo.Context) error {
 	}
 
 	db.Delete(&post, id)
-
 	return c.JSON(http.StatusNoContent, post)
 }
+
+
+func GetPostsRanking(c echo.Context) error {
+
+	postList:= []models.Post{}
+	err := db.Table("posts").Limit(10).Order("time desc").Scan(&postList)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return c.JSON(http.StatusOK, postList)
+
+} 
