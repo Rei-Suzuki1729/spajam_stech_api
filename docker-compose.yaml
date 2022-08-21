@@ -23,17 +23,17 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin-stech
     environment:
-      - PMA_ARBITRARY=1
-      - PMA_HOSTS=mariadb
-      - PMA_USER=root
-      - PMA_PASSWORD=root
-      - PMA_PORT=3306
-      - PMA_DATABASE=db
-      # - PMA_HOSTS=r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
-      # - PMA_USER=fcxjqrrnpl2zeqod
-      # - PMA_PASSWORD=uw925vz81qi2lo28
+      # - PMA_ARBITRARY=1
+      # - PMA_HOSTS=mariadb
+      # - PMA_USER=root
+      # - PMA_PASSWORD=root
       # - PMA_PORT=3306
-      # - PMA_DATABASE=u5dgnkfxds9253ou
+      # - PMA_DATABASE=db
+      - PMA_HOSTS=r98du2bxwqkq3shg.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+      - PMA_USER=fcxjqrrnpl2zeqod
+      - PMA_PASSWORD=uw925vz81qi2lo28
+      - PMA_PORT=3306
+      - PMA_DATABASE=u5dgnkfxds9253ou
     depends_on:
       - mariadb
     ports:
